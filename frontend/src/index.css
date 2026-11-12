@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apple Spatial UI & Liquid Glassmorphism Core */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-highlight: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Global smooth rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  backdrop-filter: blur(10px);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Liquid Glass Utilities */
+.liquid-glass-dock {
+  background: rgba(18, 30, 38, 0.55);
+  backdrop-filter: blur(40px) saturate(210%);
+  -webkit-backdrop-filter: blur(40px) saturate(210%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.liquid-glass-window {
+  background: rgba(14, 24, 32, 0.62);
+  backdrop-filter: blur(50px) saturate(220%);
+  -webkit-backdrop-filter: blur(50px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 30px 90px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 1px 2px rgba(255, 255, 255, 0.3) inset;
+}
+
+.liquid-glass-inner {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.liquid-glass-pill {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.liquid-glass-pill-active {
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(30px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 255, 255, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.liquid-glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.liquid-glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.liquid-glass-player {
+  background: rgba(10, 18, 25, 0.75);
+  backdrop-filter: blur(60px) saturate(240%);
+  -webkit-backdrop-filter: blur(60px) saturate(240%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.8),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Apple-style specular top highlight on glass containers */
+.liquid-glass-window::before,
+.liquid-glass-card::before,
+.liquid-glass-player::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.liquid-glass-window,
+.liquid-glass-card,
+.liquid-glass-player {
+  position: relative;
+}
+
+/* Subtle grain texture for realism */
+.liquid-glass-window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* Fluid Background Animation */
+@keyframes fluid-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(80px, -60px) scale(1.15); }
+}
+
+@keyframes fluid-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-90px, 70px) scale(0.95); }
+}
+
+@keyframes fluid-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 80px) scale(1.2); }
+}
+
+.animate-fluid-1 {
+  animation: fluid-drift-1 18s ease-in-out infinite alternate;
+}
+.animate-fluid-2 {
+  animation: fluid-drift-2 22s ease-in-out infinite alternate;
+}
+.animate-fluid-3 {
+  animation: fluid-drift-3 15s ease-in-out infinite alternate;
+}
+
+/* Leaflet Customizations for Glass Theme */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #09121a !important;
+  font-family: inherit;
+  border-radius: 24px;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(14, 25, 35, 0.85) !important;
+  backdrop-filter: blur(35px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(35px) saturate(200%) !important;
+  color: #f3f4f6 !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(14, 25, 35, 0.85) !important;
+}
+
+/* Utility Helpers */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Glass Select / Option dark background */
+.liquid-glass-inner option,
+select.liquid-glass-inner option {
+  background: #101820;
+  color: #fff;
+}
+
+/* Audio Wave Animation */
+@keyframes soundwave {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+.animate-wave-1 {
+  animation: soundwave 1.2s ease-in-out infinite;
+}
+.animate-wave-2 {
+  animation: soundwave 0.8s ease-in-out infinite 0.2s;
+}
+.animate-wave-3 {
+  animation: soundwave 1.0s ease-in-out infinite 0.4s;
+}
+.animate-wave-4 {
+  animation: soundwave 0.7s ease-in-out infinite 0.1s;
+}
